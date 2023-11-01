@@ -1,0 +1,159 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(237 242 247);
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(56, 56, 94);
+  user-select: none;
+}
+
+#image__gallery {
+  margin: 0 30px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  border-radius: 15px;
+  background: #fff;
+}
+
+header {
+  padding: 20px 30px;
+  border-bottom: 1px solid rgb(226, 226, 226);
+  display: flex;
+  justify-content: space-between;
+}
+
+header .title {
+  display: flex;
+  gap: 10px;
+}
+
+header input {
+  width: 20px;
+  height: 20px;
+}
+
+header .delete__btn {
+  color: rgb(234, 66, 56);
+  border: none;
+  background: none;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+header .delete__btn:hover {
+  text-decoration: underline;
+}
+
+.image__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  padding: 30px;
+}
+
+.image__grid .image {
+  border-radius: 10px;
+  border: 1px solid rgb(226, 226, 226);
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+.image__grid .image:first-child {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.image__grid .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image__grid .feature-image {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.image__grid .image .overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image__grid .image .overlay input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.image__grid .image:hover .overlay {
+  opacity: 1;
+}
+
+.image__grid .image .overlay.selected {
+  background: rgba(230, 230, 230, 0.5);
+  opacity: 1;
+}
+
+.image__grid .image.add__image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-style: dashed;
+  background: rgba(248, 248, 248, 0.4);
+  font-size: 0.9rem;
+}
+
+.image__grid .image.add__image img {
+  width: 20px;
+  height: 20px;
+}
+
+@media only screen and (max-width: 800px) {
+  .image__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .image__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .image__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .image__grid .image.add__image {
+    padding: 30px 0;
+  }
+
+  header {
+    font-size: 0.9rem;
+    padding: 20px;
+  }
+
+  .image__grid {
+    gap: 15px;
+    padding: 20px;
+  }
+}
