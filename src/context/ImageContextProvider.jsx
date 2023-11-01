@@ -18,10 +18,17 @@ function ImageContextProvider({ children }) {
     });
   }
 
+  function deleteSelectedImages() {
+    setImagesData((prev) => {
+      return prev.filter((image) => !image.selected);
+    });
+  }
+
   const values = {
     imagesData,
     setImagesData,
     toggleCheckbox,
+    deleteSelectedImages,
   };
 
   return (
