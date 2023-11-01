@@ -21,7 +21,7 @@ function Header() {
     <header>
       {selectedImageCount > 0 ? (
         <h3 className="title">
-          <input type="checkbox" checked />
+          <input type="checkbox" checked readOnly />
           <span>
             {selectedImageCount} {selectedImageCount > 1 ? "Files" : "File"}{" "}
             Selected
