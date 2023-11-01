@@ -119,6 +119,7 @@ header .delete__btn:hover {
   border-style: dashed;
   background: rgba(248, 248, 248, 0.4);
   font-size: 0.9rem;
+  padding: 30px 0;
 }
 
 .image__grid .image.add__image img {
@@ -141,10 +142,6 @@ header .delete__btn:hover {
 @media only screen and (max-width: 600px) {
   .image__grid {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .image__grid .image.add__image {
-    padding: 30px 0;
   }
 
   header {
