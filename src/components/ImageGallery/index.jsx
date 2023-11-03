@@ -43,6 +43,7 @@ function ImageGallery() {
       <div className="container">
         <Header
           imagesData={imagesData}
+          showSnackbar={showSnackbar}
           deleteSelectedImages={deleteSelectedImages}
         />
         <GridLayout>

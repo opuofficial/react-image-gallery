@@ -8,7 +8,7 @@ function Snackbar({ selectedImageCount, setShowSnackbar }) {
 
     setTimeout(() => {
       setShowSnackbar(false);
-    }, 3000);
+    }, 2000);
   }, []);
 
   return (

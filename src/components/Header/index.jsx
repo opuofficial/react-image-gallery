@@ -1,6 +1,6 @@
 import React from "react";
 
-function Header({ imagesData, deleteSelectedImages }) {
+function Header({ imagesData, showSnackbar, deleteSelectedImages }) {
   let selectedImageCount = 0;
 
   imagesData.forEach((image) => {
@@ -20,7 +20,11 @@ function Header({ imagesData, deleteSelectedImages }) {
               Selected
             </span>
           </h3>
-          <button className="delete__btn" onClick={deleteSelectedImages}>
+          <button
+            className="delete__btn"
+            onClick={deleteSelectedImages}
+            disabled={showSnackbar}
+          >
             Delete files
           </button>
         </>
