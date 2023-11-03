@@ -127,6 +127,25 @@ header .delete__btn:hover {
   height: 20px;
 }
 
+#snackbar {
+  background: linear-gradient(-66deg, #23bfb8 10%, #85ea80 100%);
+  color: #26302b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: 5px;
+  padding: 10px 15px;
+  box-shadow: 0 0 30px rgb(133 234 128 / 70%);
+  position: fixed;
+  left: 50%;
+  bottom: -50px;
+  transform: translateX(-50%);
+  transition: bottom 0.3s;
+}
+
+#snackbar.show {
+  bottom: 50px;
+}
+
 @media only screen and (max-width: 800px) {
   .image__grid {
     grid-template-columns: repeat(4, 1fr);
