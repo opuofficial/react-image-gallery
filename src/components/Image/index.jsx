@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import { ImageContext } from "../../context/ImageContextProvider";
+import React from "react";
 
-function Image({ data: { id, src, alt, selected } }) {
-  const { toggleCheckbox } = useContext(ImageContext);
-
+function Image({ data: { id, src, alt, selected }, toggleCheckbox }) {
   return (
     <div className="image">
       <img src={`images/${src}`} alt={alt} />

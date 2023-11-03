@@ -1,8 +1,6 @@
-import React, { useContext } from "react";
-import { ImageContext } from "../../context/ImageContextProvider";
+import React from "react";
 
-function Header() {
-  const { imagesData, deleteSelectedImages } = useContext(ImageContext);
+function Header({ imagesData, deleteSelectedImages }) {
   let selectedImageCount = 0;
 
   imagesData.forEach((image) => {
