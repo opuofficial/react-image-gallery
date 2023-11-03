@@ -133,6 +133,11 @@ header .delete__btn[disabled] {
 }
 
 #snackbar {
+  width: 90%;
+  max-width: 350px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background: linear-gradient(-66deg, #23bfb8 10%, #85ea80 100%);
   color: #26302b;
   font-size: 0.85rem;
@@ -149,6 +154,17 @@ header .delete__btn[disabled] {
 
 #snackbar.show {
   bottom: 50px;
+}
+
+#snackbar .undo__button {
+  cursor: pointer;
+  padding: 5px 10px;
+  margin-left: 15px;
+  border-radius: 3px;
+  border: none;
+  font-weight: bold;
+  background: transparent;
+  color: white;
 }
 
 @media only screen and (max-width: 800px) {

@@ -11,6 +11,7 @@ function ImageGallery() {
   const [imagesData, setImagesData] = useState(data);
   const [selectedImageCount, setSelectedImageCount] = useState(0);
   const [showSnackbar, setShowSnackbar] = useState(false);
+  const [deletedImages, setDeletedImages] = useState([]);
 
   function toggleCheckbox(imageId) {
     setImagesData((prev) => {
@@ -31,11 +32,34 @@ function ImageGallery() {
 
     setSelectedImageCount(totalSelectedImage);
 
+    const deleted = imagesData
+      .map((image, index) => {
+        if (image.selected) {
+          return { image, index };
+        }
+      })
+      .filter(Boolean);
+
+    setDeletedImages(deleted);
+
     setImagesData((prev) => {
       return prev.filter((image) => !image.selected);
     });
 
     setShowSnackbar(true);
+  }
+
+  function handleUndo() {
+    const restoredImages = [...imagesData];
+
+    deletedImages.forEach(({ image, index }) => {
+      image.selected = false;
+      restoredImages.splice(index, 0, image);
+    });
+
+    setImagesData(restoredImages);
+    setShowSnackbar(false);
+    setDeletedImages([]);
   }
 
   return (
@@ -57,6 +81,7 @@ function ImageGallery() {
         <Snackbar
           selectedImageCount={selectedImageCount}
           setShowSnackbar={setShowSnackbar}
+          handleUndo={handleUndo}
         />
       )}
     </section>

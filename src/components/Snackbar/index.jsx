@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Snackbar({ selectedImageCount, setShowSnackbar }) {
+function Snackbar({ selectedImageCount, setShowSnackbar, handleUndo }) {
   const [showClass, setShowClass] = useState(false);
 
   useEffect(() => {
@@ -8,14 +8,19 @@ function Snackbar({ selectedImageCount, setShowSnackbar }) {
 
     setTimeout(() => {
       setShowSnackbar(false);
-    }, 2000);
+    }, 5000);
   }, []);
 
   return (
     <div id="snackbar" className={`${showClass ? "show" : ""}`}>
-      {selectedImageCount > 1
-        ? `${selectedImageCount} images have been deleted`
-        : `${selectedImageCount} image has been deleted`}
+      <span>
+        {selectedImageCount > 1
+          ? `${selectedImageCount} images have been deleted`
+          : `${selectedImageCount} image has been deleted`}
+      </span>
+      <button className="undo__button" onClick={handleUndo}>
+        Undo
+      </button>
     </div>
   );
 }
