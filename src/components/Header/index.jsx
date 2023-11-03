@@ -1,21 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { ImageContext } from "../../context/ImageContextProvider";
 
 function Header() {
   const { imagesData, deleteSelectedImages } = useContext(ImageContext);
-  const [selectedImageCount, setSelectedImageCount] = useState(0);
+  let selectedImageCount = 0;
 
-  useEffect(() => {
-    let totalSelected = 0;
-
-    imagesData.forEach((image) => {
-      if (image.selected) {
-        totalSelected++;
-      }
-    });
-
-    setSelectedImageCount(totalSelected);
-  }, [imagesData]);
+  imagesData.forEach((image) => {
+    if (image.selected) {
+      selectedImageCount++;
+    }
+  });
 
   return (
     <header>
