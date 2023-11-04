@@ -1,13 +1,7 @@
 import React from "react";
 
 function Header({ imagesData, showSnackbar, deleteSelectedImages }) {
-  let selectedImageCount = 0;
-
-  imagesData.forEach((image) => {
-    if (image.selected) {
-      selectedImageCount++;
-    }
-  });
+  let selectedImageCount = imagesData.filter((image) => image.selected).length;
 
   return (
     <header>
