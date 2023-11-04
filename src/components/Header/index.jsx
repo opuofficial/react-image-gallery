@@ -1,6 +1,7 @@
 import React from "react";
 
 function Header({ imagesData, showSnackbar, deleteSelectedImages }) {
+  // Count the total number of selected images by filtering the 'imagesData' array
   let selectedImageCount = imagesData.filter((image) => image.selected).length;
 
   return (
@@ -14,6 +15,7 @@ function Header({ imagesData, showSnackbar, deleteSelectedImages }) {
               Selected
             </span>
           </h3>
+          {/* Disable the button when the Snackbar is shown */}
           <button
             className="delete__btn"
             onClick={deleteSelectedImages}
@@ -23,6 +25,7 @@ function Header({ imagesData, showSnackbar, deleteSelectedImages }) {
           </button>
         </>
       ) : (
+        // Display Gallery title when no images are selected
         <h3 className="title">Gallery</h3>
       )}
     </header>
