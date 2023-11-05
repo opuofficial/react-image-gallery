@@ -71,6 +71,7 @@ header .delete__btn[disabled] {
   cursor: pointer;
   position: relative;
   transform-origin: 0 0;
+  background: white;
 }
 
 .image__grid .image:first-child {
