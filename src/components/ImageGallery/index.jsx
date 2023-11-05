@@ -1,4 +1,20 @@
 import React, { useEffect, useState } from "react";
+
+import {
+  DndContext,
+  closestCenter,
+  MouseSensor,
+  TouchSensor,
+  DragOverlay,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  rectSortingStrategy,
+} from "@dnd-kit/sortable";
+
 import Header from "../Header";
 import GridLayout from "../GridLayout";
 import Image from "../Image";
@@ -13,6 +29,32 @@ function ImageGallery() {
   const [selectedImageCount, setSelectedImageCount] = useState(0);
   const [showSnackbar, setShowSnackbar] = useState(false);
   const [deletedImages, setDeletedImages] = useState([]);
+
+  const [activeId, setActiveId] = useState(null);
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+  function handleDragStart(event) {
+    setActiveId(event.active.id);
+  }
+
+  function handleDragCancel() {
+    setActiveId(null);
+  }
+
+  function handleDragEnd(event) {
+    const { active, over } = event;
+
+    if (active.id !== over.id) {
+      let oldIndex = imagesData.findIndex((obj) => obj.id == active.id);
+      let newIndex = imagesData.findIndex((obj) => obj.id == over.id);
+
+      setImagesData((images) => {
+        return arrayMove(images, oldIndex, newIndex);
+      });
+    }
+
+    setActiveId(null);
+  }
 
   /**
    * Toggles the 'selected' property of a specific image in the 'imagesData' array.
@@ -97,28 +139,43 @@ function ImageGallery() {
   }
 
   return (
-    <section id="image__gallery">
-      <div className="container">
-        <Header
-          imagesData={imagesData}
-          showSnackbar={showSnackbar}
-          deleteSelectedImages={deleteSelectedImages}
-        />
-        <GridLayout>
-          {imagesData.map((item) => (
-            <Image data={item} key={item.id} toggleCheckbox={toggleCheckbox} />
-          ))}
-          <AddImageButton />
-        </GridLayout>
-      </div>
-      {showSnackbar && (
-        <Snackbar
-          selectedImageCount={selectedImageCount}
-          setShowSnackbar={setShowSnackbar}
-          handleUndo={handleUndo}
-        />
-      )}
-    </section>
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+      onDragCancel={handleDragCancel}
+    >
+      <section id="image__gallery">
+        <div className="container">
+          <Header
+            imagesData={imagesData}
+            showSnackbar={showSnackbar}
+            deleteSelectedImages={deleteSelectedImages}
+          />
+          <SortableContext items={imagesData} strategy={rectSortingStrategy}>
+            <GridLayout>
+              {imagesData.map((item, index) => (
+                <Image
+                  data={item}
+                  key={item.id}
+                  index={index}
+                  toggleCheckbox={toggleCheckbox}
+                />
+              ))}
+              <AddImageButton />
+            </GridLayout>
+          </SortableContext>
+        </div>
+        {showSnackbar && (
+          <Snackbar
+            selectedImageCount={selectedImageCount}
+            setShowSnackbar={setShowSnackbar}
+            handleUndo={handleUndo}
+          />
+        )}
+      </section>
+    </DndContext>
   );
 }
 
