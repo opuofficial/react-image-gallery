@@ -70,6 +70,7 @@ header .delete__btn[disabled] {
   overflow: hidden;
   cursor: pointer;
   position: relative;
+  transform-origin: 0 0;
 }
 
 .image__grid .image:first-child {
