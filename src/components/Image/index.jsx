@@ -2,7 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
-function Image({ data: { id, src, alt, selected }, toggleCheckbox, index }) {
+function Image({
+  data: { id, src, alt, selected },
+  toggleCheckbox,
+  index,
+  activeId,
+}) {
   const [isChecked, setIsChecked] = useState(selected);
   const sortable = useSortable({ id });
   const {
@@ -17,6 +22,7 @@ function Image({ data: { id, src, alt, selected }, toggleCheckbox, index }) {
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
+    zIndex: activeId == id ? 1 : "auto",
   };
 
   function handleMouseUp(event) {

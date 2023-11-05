@@ -160,6 +160,7 @@ function ImageGallery() {
                   data={item}
                   key={item.id}
                   index={index}
+                  activeId={activeId}
                   toggleCheckbox={toggleCheckbox}
                 />
               ))}
