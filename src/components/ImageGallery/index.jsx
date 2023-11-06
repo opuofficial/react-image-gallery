@@ -22,6 +22,7 @@ import AddImageButton from "../AddImageButton";
 
 import data from "../../../data";
 import Snackbar from "../Snackbar";
+import ImagePlaceholder from "../ImagePlaceholder";
 
 function ImageGallery() {
   // State to manage image data, selected image count, snackbar visibility, and deleted images
@@ -31,6 +32,7 @@ function ImageGallery() {
   const [deletedImages, setDeletedImages] = useState([]);
 
   const [activeId, setActiveId] = useState(null);
+  const [imagePlaceholder, setImagePlaceholder] = useState(null);
   const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
   function handleDragStart(event) {
@@ -38,10 +40,12 @@ function ImageGallery() {
   }
 
   function handleDragCancel() {
+    setImagePlaceholder(null);
     setActiveId(null);
   }
 
   function handleDragEnd(event) {
+    setImagePlaceholder(null);
     const { active, over } = event;
 
     if (active.id !== over.id) {
@@ -54,6 +58,17 @@ function ImageGallery() {
     }
 
     setActiveId(null);
+  }
+
+  function handleDragOver(event) {
+    const { active, over } = event;
+
+    if (active.id == over.id) {
+      return;
+    }
+
+    const { height, width, top, left } = event.over.rect;
+    setImagePlaceholder({ height, width, top, left });
   }
 
   /**
@@ -145,6 +160,7 @@ function ImageGallery() {
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
+      onDragOver={handleDragOver}
     >
       <section id="image__gallery">
         <div className="container">
@@ -168,6 +184,7 @@ function ImageGallery() {
             </GridLayout>
           </SortableContext>
         </div>
+        {imagePlaceholder && <ImagePlaceholder {...imagePlaceholder} />}
         {showSnackbar && (
           <Snackbar
             selectedImageCount={selectedImageCount}
