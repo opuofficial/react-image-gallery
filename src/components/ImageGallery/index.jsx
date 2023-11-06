@@ -62,13 +62,10 @@ function ImageGallery() {
 
   function handleDragOver(event) {
     const { active, over } = event;
-
-    if (active.id == over.id) {
-      return;
-    }
+    let isDraggedOverItself = active.id == over.id;
 
     const { height, width, top, left } = event.over.rect;
-    setImagePlaceholder({ height, width, top, left });
+    setImagePlaceholder({ height, width, top, left, isDraggedOverItself });
   }
 
   /**
