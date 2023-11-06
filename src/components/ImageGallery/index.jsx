@@ -47,6 +47,10 @@ function ImageGallery() {
     setImagePlaceholder(null);
     const { active, over } = event;
 
+    if (!over) {
+      return;
+    }
+
     if (active.id !== over.id) {
       let oldIndex = imagesData.findIndex((obj) => obj.id == active.id);
       let newIndex = imagesData.findIndex((obj) => obj.id == over.id);
