@@ -7,9 +7,13 @@ function Snackbar({ selectedImageCount, setShowSnackbar, handleUndo }) {
   useEffect(() => {
     setShowClass(true);
 
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setShowSnackbar(false);
     }, 5000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
