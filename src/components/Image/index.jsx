@@ -35,6 +35,8 @@ function Image({
     setIsChecked(selected);
   }, [selected]);
 
+  const imgSrc = src.includes("blob") ? src : `images/${src}`;
+
   return (
     <div
       className="image"
@@ -45,7 +47,7 @@ function Image({
       {...listeners}
       onMouseUp={handleMouseUp}
     >
-      <img src={`images/${src}`} alt={alt} />
+      <img src={imgSrc} alt={alt} />
       <div className={`overlay ${selected ? "selected" : ""}`}>
         <input type="checkbox" checked={isChecked} onChange={() => {}} />
       </div>

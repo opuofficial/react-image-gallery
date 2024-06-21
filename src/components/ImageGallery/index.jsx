@@ -162,7 +162,7 @@ function ImageGallery() {
                   toggleCheckbox={toggleCheckbox}
                 />
               ))}
-              <AddImageButton />
+              <AddImageButton setImagesData={setImagesData} />
             </GridLayout>
           </SortableContext>
         </div>
